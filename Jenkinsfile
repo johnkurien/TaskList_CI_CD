@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/johnkurien/TaskList_CI_CD.git'
-            }
-        }
 
         stage('Build & Test') {
             steps {
