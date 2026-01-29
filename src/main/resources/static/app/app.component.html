@@ -1,0 +1,51 @@
+<div class="container">
+  <h2>Task Manager</h2>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div class="input-group">
+    <input
+      [(ngModel)]="newTaskName"
+      placeholder="New task"
+      (keyup.enter)="addTask()"
+      [disabled]="loading"
+    />
+    <button (click)="addTask()" [disabled]="loading">
+      {{ loading ? 'Adding...' : 'Add' }}
+    </button>
+  </div>
+
+  <div *ngIf="loading && tasks.length === 0" class="loading">
+    Loading tasks...
+  </div>
+
+  <ul *ngIf="tasks.length > 0; else noTasks" class="task-list">
+    <li *ngFor="let task of tasks" class="task-item">
+      <div *ngIf="editingId !== task.id" class="task-text">
+        {{ task.name }}
+      </div>
+      <input
+        *ngIf="editingId === task.id"
+        [(ngModel)]="editingName"
+        class="task-input"
+        type="text"
+      />
+      <div class="task-actions">
+        <ng-container *ngIf="editingId !== task.id">
+          <button class="edit-btn" (click)="startEdit(task)">Edit</button>
+          <button class="delete-btn" (click)="deleteTask(task.id)">Delete</button>
+        </ng-container>
+        <ng-container *ngIf="editingId === task.id">
+          <button class="save-btn" (click)="saveEdit(task)">Save</button>
+          <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+        </ng-container>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #noTasks>
+    <ul class="task-list empty">
+      <li>No tasks yet. Add one to get started!</li>
+    </ul>
+  </ng-template>
+</div>
