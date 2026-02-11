@@ -395,8 +395,8 @@ mvn dependency:resolve
 ## Next Steps
 
 1. **Clone/Setup:** Ensure all prerequisites are installed
-2. **Backend:** Start Spring Boot with `mvn spring-boot:run`
-3. **Frontend:** Start Angular with `npm start`
+2. **Backend:** Start Spring Boot with `./mvnw clean package spring-boot:run`
+3. **Frontend:** Start Angular with `npm start` in the /src/main/resources/static directory (or wherever the package.json file is present)
 4. **Test:** Open `http://localhost:4200` and try the app
 5. **Develop:** Make changes and see hot reload
 6. **Build:** Run `mvn clean install` for production
